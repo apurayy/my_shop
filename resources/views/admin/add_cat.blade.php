@@ -12,11 +12,25 @@
                 {{-- <small class="text-muted float-end">Default label</small> --}}
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+
+                {{-- ==error message =================--}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                {{-- ==error message =================--}}
+
+                <form action="{{ route('store_category') }}" method="POST">
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="Category">Category Name</label>
-                        <input type="text" name="category_name" class="form-control" id="Category" placeholder="Category Name">
+                        <input type="text" name="category_name" class="form-control" id="Category"
+                            placeholder="Category Name">
                     </div>
 
 

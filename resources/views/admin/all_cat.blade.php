@@ -7,6 +7,13 @@
 @section('content')
     <div class="card">
         <h5 class="card-header">All Category List</h5>
+
+        @if (@session('message'))
+            <div class="alert alert-success">
+                {{ session('message') }}
+            </div>
+        @endif
+
         <div class="table-responsive text-nowrap">
             <table class="table">
                 <thead class="table-light">
