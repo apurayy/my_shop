@@ -13,7 +13,7 @@ Add Sub Category | My Shop
             {{-- <small class="text-muted float-end">Default label</small> --}}
         </div>
         <div class="card-body">
-            <form action="" method="POST">
+            <form action="{{ route('store_sub_category') }}" method="POST">
                 @csrf
 
                 <div class="mb-3">
@@ -24,11 +24,11 @@ Add Sub Category | My Shop
 
                 <div class="mb-3">
                     <label for="defaultSelect" class="form-label">Category Name</label>
-                    <select id="defaultSelect" class="form-select" name="category_name">
+                    <select id="defaultSelect" class="form-select" name="category_id">
                       <option>Select Category</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{ $category->category_name }}</option>
+                        @endforeach
                     </select>
                   </div>
 
