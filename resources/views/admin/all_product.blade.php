@@ -6,8 +6,22 @@
 
 @section('content')
     <div class="card">
-        <h5 class="card-header">All Product List</h5>
+
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">All Product List</h5>
+            <small class="text-muted float-end">
+                <a href="{{route('add_product')}}" class="btn btn-primary">Add New</a>
+            </small>
+        </div>
+
+
         <div class="table-responsive text-nowrap">
+            @if (@session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
             <table class="table">
                 <thead class="table-light">
                     <tr>

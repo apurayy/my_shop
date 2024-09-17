@@ -12,30 +12,40 @@
                 {{-- <small class="text-muted float-end">Default label</small> --}}
             </div>
             <div class="card-body">
-                <form action="" method="POST">
+                <form action="{{ route('store_product') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                    {{-- ==error message ================= --}}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    {{-- ==error message ================= --}}
 
                     <div class="mb-3">
                         <label class="form-label" for="Category">Product Name</label>
                         <input type="text" name="product_name" class="form-control" id="Category"
-                            placeholder="Category Name">
+                            placeholder="Product Name">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Product Price</label>
-                        <input type="number" name="product_price" class="form-control"
-                            placeholder="100.00">
+                        <input type="number" name="product_price" class="form-control" placeholder="100.00">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Product Quantity</label>
-                        <input type="number" name="product_quantity" class="form-control"
-                            placeholder="50">
+                        <input type="number" name="product_quantity" class="form-control" placeholder="50">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Product Short Description</label>
-                        <textarea name="product_shot_des" class="form-control" cols="30" rows="5"></textarea>
+                        <textarea name="product_short_des" class="form-control" cols="30" rows="5"></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -45,22 +55,26 @@
 
 
                     <div class="mb-3">
-                        <label for="defaultSelect" class="form-label">Category Select</label>
-                        <select id="defaultSelect" class="form-select" name="category_name">
-                            <option>Select Category</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <label for="category_id " class="form-label">Category Select</label>
+                        <select id="category_id " class="form-select" name="category_id">
+                            <option>Select Product Category</option>
+
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @endforeach
+
                         </select>
                     </div>
 
                     <div class="mb-3">
                         <label for="defaultSelect" class="form-label">Sub Category Select</label>
-                        <select id="defaultSelect" class="form-select" name="sub_category_name">
+                        <select id="defaultSelect" class="form-select" name="sub_category_id">
                             <option>Select Sub Category</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+
+                            @foreach ($subcategories as $sub_cat)
+                                <option value="{{ $sub_cat->id }}">{{ $sub_cat->sub_category_name }}</option>
+                            @endforeach
+
                         </select>
                     </div>
 
@@ -68,7 +82,6 @@
                         <label class="form-label">Upload Product Image</label>
                         <input type="file" name="product_img" class="form-select">
                     </div>
-
 
                     <button type="submit" class="btn btn-primary">Add Product</button>
                 </form>

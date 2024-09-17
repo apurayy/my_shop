@@ -46,6 +46,7 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     //Product===================
     Route::get('/admin/all-product',[ProductController::class, 'all_product'])->name('all_product');
     Route::get('/admin/add-product',[ProductController::class, 'add_product'])->name('add_product');
+    Route::post('/admin/store-product',[ProductController::class, 'store_product'])->name('store_product');
 
     //order============
     Route::get('/admin/pending-order', [OrderController::class, 'pending_order'])->name('pending_order');
