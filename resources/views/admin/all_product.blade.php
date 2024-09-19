@@ -33,17 +33,22 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
+                    @foreach ($products as $product)
+
                     <tr>
-                        <td>1</td>
-                        <td>Cook</td>
-                        <td>img</td>
-                        <td>300.00</td>
+                        <td>{{ $product->id }}</td>
+                        <td>{{ $product->product_name }}</td>
                         <td>
-                            <a href="" class="btn btn-primary">Edite</a>
-                            <a href="" class="btn btn-danger">Delete</a>
+                            <img style="width: 130px; height:100px; margin-bottom:5px;" src="{{ asset($product->product_img) }}" alt=""><br>
+                            <a href="{{ route('edit_pro_img', $product->id) }}" class="btn btn-primary">Update Image</a>
+                        </td>
+                        <td>{{ $product->product_price }}</td>
+                        <td>
+                            <a href="{{ route('edit_product', $product->id) }}" class="btn btn-primary">Edite</a>
+                            <a href="{{ route('delete_product', $product->id) }}" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
-
+                    @endforeach
 
                 </tbody>
             </table>
