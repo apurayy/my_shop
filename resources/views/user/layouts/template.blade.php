@@ -82,9 +82,13 @@
                     <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                         <a href="index.html">Home</a>
-                        <a href="fashion.html">Fashion</a>
-                        <a href="electronic.html">Electronic</a>
-                        <a href="jewellery.html">Jewellery</a>
+
+                        @php
+                            $categories = App\Models\Category::latest()->get();
+                        @endphp
+                        @foreach ($categories as $category)
+                            <a href="{{ route('category_page', [$category->id, $category->slug] ) }}">{{ $category->category_name }}</a>
+                        @endforeach
                     </div>
                     <span class="toggle_icon" onclick="openNav()"><img
                             src="{{ asset('frontend/images/toggle-icon.png') }}"></span>
@@ -93,9 +97,12 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">All Category
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            @php
+                                $categories = App\Models\Category::latest()->get();
+                            @endphp
+                            @foreach ($categories as $category)
+                                <a class="dropdown-item" href="#">{{ $category->category_name }}</a>
+                            @endforeach
                         </div>
                     </div>
                     <div class="main">
@@ -133,7 +140,7 @@
                                         <span class="padding_10">Cart</span></a>
                                 </li>
                                 <li>
-                                    <a href="{{route('login')}}">
+                                    <a href="{{ route('login') }}">
                                         <i class="fa fa-user" aria-hidden="true"></i>
                                         <span class="padding_10">Login</span>
                                     </a>
