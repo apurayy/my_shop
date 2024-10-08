@@ -10,12 +10,13 @@ class ClientController extends Controller
 {
     public function category_page($id){
         $category = Category::findOrFail($id);
-        $products = Product::where('');
-        return view('user.category', compact('category'));
+        $products = Product::where('category_id', $id)->latest()->get();
+        return view('user.category', compact('category','products'));
     }
 
-    public function single_product(){
-        return view('user.single_product');
+    public function single_product($id){
+        $single_product = Product::findOrFail($id);
+        return view('user.single_product', compact('single_product'));
     }
 
     public function add_to_cart(){

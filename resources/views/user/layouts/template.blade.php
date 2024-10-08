@@ -68,7 +68,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="logo"><a href=""><img src="{{ asset('frontend/images/logo.png') }}"></a>
+                        <div class="logo"><a href="{{route('home')}}"><img src="{{ asset('frontend/images/logo.png') }}"></a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                 <div class="containt_main">
                     <div id="mySidenav" class="sidenav">
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-                        <a href="index.html">Home</a>
+                        <a href="{{route('home')}}">Home</a>
 
                         @php
                             $categories = App\Models\Category::latest()->get();
@@ -101,7 +101,7 @@
                                 $categories = App\Models\Category::latest()->get();
                             @endphp
                             @foreach ($categories as $category)
-                                <a class="dropdown-item" href="#">{{ $category->category_name }}</a>
+                                <a class="dropdown-item" href="{{ route('category_page', [$category->id, $category->slug] ) }}">{{ $category->category_name }}</a>
                             @endforeach
                         </div>
                     </div>
